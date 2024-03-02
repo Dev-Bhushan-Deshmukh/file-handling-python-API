@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload</title>
+</head>
+<body>
+    <h2>Upload a File</h2>
+    <input type="file" id="fileInput">
+    <button onclick="uploadFile()">Upload</button>
+
+    <script>
+        function uploadFile() {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+            
+            const formData = new FormData();
+            formData.append('file', file);
+            
+            fetch('http://127.0.0.1:3000/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+              
+                    return response.text();
+   
+            })
+            .then(data => {
+                console.log(data);
+            })
+          
+        }
+    </script>
+</body>
+</html>
